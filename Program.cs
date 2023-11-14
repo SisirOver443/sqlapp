@@ -1,3 +1,4 @@
+using Microsoft.FeatureManagement;
 using sqlapp.Pages.Services;
 
 
@@ -8,12 +9,14 @@ var connectionString = "Endpoint=https://prac-learn-14-appconfigs.azconfig.io;Id
 
 builder.Host.ConfigureAppConfiguration(builder =>
 {
-    builder.AddAzureAppConfiguration(connectionString);
+    builder.AddAzureAppConfiguration(options=>
+        options.Connect(connectionString).UseFeatureFlags());
 });
 
 builder.Services.AddTransient<IProductService, ProductService>();
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddFeatureManagement();
 
 var app = builder.Build();
 

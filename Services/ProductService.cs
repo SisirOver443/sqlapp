@@ -1,4 +1,5 @@
-﻿using sqlapp.Models;
+﻿using Microsoft.FeatureManagement;
+using sqlapp.Models;
 using System.Data.SqlClient;
 
 namespace sqlapp.Pages.Services
@@ -6,14 +7,28 @@ namespace sqlapp.Pages.Services
     public class ProductService : IProductService
     {
         private readonly IConfiguration _configuration;
+        private readonly IFeatureManager _featureManager;
 
-        public ProductService(IConfiguration configuration)
+        public ProductService(IConfiguration configuration, IFeatureManager featureManager)
         {
             _configuration = configuration;
+            _featureManager = featureManager;
         }
         private SqlConnection GetConnection()
         {
             return new SqlConnection(_configuration["appdb"]);
+        }
+
+        public async Task<bool> IsBeta()
+        {
+            if (await _featureManager.IsEnabledAsync("beta"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public List<Product> GetProducts()
