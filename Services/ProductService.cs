@@ -13,7 +13,7 @@ namespace sqlapp.Pages.Services
         }
         private SqlConnection GetConnection()
         {
-            return new SqlConnection(_configuration.GetConnectionString("appdb"));
+            return new SqlConnection(_configuration.["appdb"]);
         }
 
         public List<Product> GetProducts()

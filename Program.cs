@@ -1,6 +1,15 @@
 using sqlapp.Pages.Services;
 
+
+
 var builder = WebApplication.CreateBuilder(args);
+
+var connectionString = "Endpoint=https://prac-learn-14-appconfigs.azconfig.io;Id=yF5P;Secret=2wi12rwXGS9I199KCXcBKLKLUua+uZQt2T9TKZhAw9E=";
+
+builder.Host.ConfigureAppConfiguration(builder =>
+{
+    builder.AddAzureConfiguration(connectionString);
+});
 
 builder.Services.AddTransient<IProductService, ProductService>();
 // Add services to the container.
