@@ -8,7 +8,7 @@ var connectionString = "Endpoint=https://prac-learn-14-appconfigs.azconfig.io;Id
 
 builder.Host.ConfigureAppConfiguration(builder =>
 {
-    builder.AddAzureConfiguration(connectionString);
+    builder.AddAzureAppConfiguration(connectionString);
 });
 
 builder.Services.AddTransient<IProductService, ProductService>();
