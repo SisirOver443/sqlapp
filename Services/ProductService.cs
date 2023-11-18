@@ -13,7 +13,7 @@ namespace sqlapp.Pages.Services
         }
         private SqlConnection GetConnection()
         {
-            string connectionString = "Server=tcp:prac-learn-14-db.database.windows.net,1433;Initial Catalog=appdb;Persist Security Info=False;User ID=sqladmin;Password=BigChungu$11;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            string connectionString = "";
             return new SqlConnection(connectionString);
         }
 
